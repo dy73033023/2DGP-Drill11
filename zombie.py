@@ -64,7 +64,6 @@ class Zombie:
         return self.x - self.bb_x, self.y - self.bb_y, self.x + self.bb_x, self.y + self.bb_y
 
     def handle_collision(self, group, other):
-        global bb_x, bb_y
         if group == 'zombie : ball':
             if self.hp == 2:
                 self.hp = 1
