@@ -5,6 +5,7 @@ import game_world
 import game_framework
 
 from ball import Ball
+from zombie import Zombie
 from state_machine import StateMachine
 
 
@@ -154,7 +155,7 @@ class Boy:
                 self.RUN : {space_down: self.RUN, right_up: self.IDLE, left_up: self.IDLE, right_down: self.IDLE, left_down: self.IDLE}
             }
         )
-
+        game_world.add_collision_pair('boy : zombie', None, None)
 
 
     def update(self):
@@ -186,4 +187,7 @@ class Boy:
         if group == 'boy : ball':
             self.ball_count += 1
             print('boy got ball!')
-            pass
+        elif group == 'boy : zombie':
+            game_world.remove_object(self)
+            # 프로그램 종료
+            game_framework.quit()
