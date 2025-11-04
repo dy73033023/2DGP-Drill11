@@ -180,6 +180,7 @@ class Boy:
             game_world.add_collision_pair('grass : ball', None, ball)
             # 1초 후에 아래 작업이 수행 되도록 예약
             game_world.add_collision_pair('boy : ball', None, ball)
+            game_world.add_collision_pair('zombie : ball', None, ball)
 
     def get_bb(self):
         return self.x - 20, self.y - 40, self.x + 20, self.y + 40
