@@ -28,21 +28,26 @@ def init():
     game_world.add_object(grass, 0)
     game_world.add_collision_pair('grass : ball', grass, None)  # 볼과 잔디 사이의 충돌 검사를 위해 빈 쌍 추가
 
+
     boy = Boy()
     game_world.add_object(boy, 1)
+
 
     global balls
     balls = [Ball(random.randint(100, 1500), 60, 0) for _ in range(30)]
     game_world.add_objects(balls, 1)
-
-
     # 소년과 볼 사이에 대한 충돌 검사가 필요하다는 정보를 추가
     game_world.add_collision_pair('boy : ball', boy, None)
     for ball in balls:
         game_world.add_collision_pair('boy : ball', None, ball)
 
+
     zombies = [Zombie() for _ in range(4)]
     game_world.add_objects(zombies, 1)
+    # 좀비와 볼 사이에 대한 충돌 검사가 필요하다는 정보를 추가
+    game_world.add_collision_pair('zombie : ball', ball, None)  # 좀비와 볼 사이의 충돌 검사를 위해 빈 쌍 추가
+    # for zombie in zombies:
+    #     game_world.add_collision_pair('zombie : ball', None, zombie)
 
 def update():
     game_world.update()
