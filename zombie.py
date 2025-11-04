@@ -1,7 +1,8 @@
 import random
 import math
-import game_framework
 import game_world
+import game_framework
+
 
 from pico2d import *
 
@@ -34,10 +35,6 @@ class Zombie:
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1,1])
 
-
-    def get_bb(self):
-        return self.x - 100, self.y - 100, self.x + 100, self.y + 100
-
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
         self.x += RUN_SPEED_PPS * self.dir * game_framework.frame_time
@@ -59,5 +56,12 @@ class Zombie:
     def handle_event(self, event):
         pass
 
+    def get_bb(self):
+        return self.x - 100, self.y - 100, self.x + 100, self.y + 100
+
+    def handle_collision(self, group, other):
+        if group == 'zombie : ball':
+            print('Zombie hit!')
+        pass
 
 

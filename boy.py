@@ -130,9 +130,6 @@ class Run:
 
 
 
-
-
-
 class Boy:
     def __init__(self):
 
@@ -188,4 +185,5 @@ class Boy:
     def handle_collision(self, group, other):
         if group == 'boy : ball':
             self.ball_count += 1
+            print('boy got ball!')
             pass
