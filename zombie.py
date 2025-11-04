@@ -38,6 +38,7 @@ class Zombie:
         self.dir = random.choice([-1,1])
         self.hp = 2
         self.width, self.length = 200, 200
+        self.bb_x, self.bb_y = 70, 100
 
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
@@ -48,7 +49,6 @@ class Zombie:
             self.dir = 1
         self.x = clamp(800, self.x, 1600)
         pass
-
 
     def draw(self):
         if self.dir < 0:
@@ -61,13 +61,15 @@ class Zombie:
         pass
 
     def get_bb(self):
-        return self.x - 100, self.y - 100, self.x + 100, self.y + 100
+        return self.x - self.bb_x, self.y - self.bb_y, self.x + self.bb_x, self.y + self.bb_y
 
     def handle_collision(self, group, other):
+        global bb_x, bb_y
         if group == 'zombie : ball':
             if self.hp == 2:
                 self.hp = 1
                 self.width, self.length = self.width / 2 , self.length
+                self.bb_x, self.bb_y = self.bb_x / 2, self.bb_y
             elif self.hp == 1:
                 game_world.remove_object(self)
             print('Zombie hit!')
